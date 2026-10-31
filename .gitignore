@@ -1,0 +1,21 @@
+# 本仓库 Git 忽略规则
+
+# 本地思考空间：不提交 GitHub
+/notes/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.venv-site/
+
+# 构建产物
+build/
+_site/
+node_modules/
+
+# 编辑器与系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
