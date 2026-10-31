@@ -1,0 +1,39 @@
+name: Docs Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.md"
+      - "scripts/check_docs.py"
+      - ".github/workflows/docs-check.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "**.md"
+      - "scripts/check_docs.py"
+      - ".github/workflows/docs-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  docs-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run documentation checks
+        id: check
+        run: python scripts/check_docs.py
+
+      - name: Run in strict mode once the outline is bilingual
+        if: ${{ vars.STRICT_DOCS_CHECK == 'true' }}
+        run: python scripts/check_docs.py --strict
